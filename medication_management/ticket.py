@@ -12,32 +12,56 @@ class Ticket:
     totale: float = None
 
     def cargar_ticket_desde_txt(self, file_path: str):
-        locale.setlocale(locale.LC_TIME, 'it_IT.UTF-8')  # Imposta la locale italiana
+        """Carica i dati di un ticket leggendo un file di testo."""
+        lines = self._leggi_file(file_path)
+        self._parsa_dati(lines)
 
+    def _leggi_file(self, file_path: str) -> List[str]:
+        """Legge un file di testo e restituisce una lista di righe."""
         with open(file_path, "r", encoding="utf-8") as file:
-            lines = file.readlines()
+            return file.readlines()
 
-        self.medicamentos.clear()  # Pulisce la lista dei medicamenti prima del caricamento
+    def _parsa_dati(self, lines: List[str]):
+        """Analizza le righe del file e aggiorna gli attributi del ticket."""
+        self.medicamentos.clear()  
 
         for line in lines:
             line = line.strip()
 
             if line.startswith("Cliente:"):
-                self.cliente = line.split(":", 1)[1].strip()
+                self.cliente = self._parsa_cliente(line)
 
             elif line.startswith("Data:"):
-                self.fecha = datetime.strptime(line.split(":", 1)[1].strip(), "%d %B %Y")
+                self.fecha = self._parsa_data(line)
 
             elif line.startswith("Totale:"):
-                self.totale = float(line.split(":", 1)[1].strip().replace("€", "").replace(",", "."))
+                self.totale = self._parsa_totale(line)
 
             elif "|" in line and not line.startswith("Articolo"):
-                parts = line.split("|")
-                if len(parts) == 4:
-                    nombre = parts[0].strip()
-                    cantidad_info = parts[1].strip().split()
-                    cantidad = float(cantidad_info[0])
-                    unitad = cantidad_info[1] if len(cantidad_info) > 1 else ''
-                    precio = float(parts[3].strip().replace("€", "").replace(",", "."))
-                    medicamento = Medicamento(nombre, cantidad, precio, unitad)
+                medicamento = self._parsa_medicamento(line)
+                if medicamento:
                     self.medicamentos.append(medicamento)
+
+    def _parsa_cliente(self, line: str) -> str:
+        """Estrae il cliente dalla riga."""
+        return line.split(":", 1)[1].strip()
+
+    def _parsa_data(self, line: str) -> datetime:
+        """Estrae e converte la data dalla riga."""
+        return datetime.strptime(line.split(":", 1)[1].strip(), "%d %B %Y")
+
+    def _parsa_totale(self, line: str) -> float:
+        """Estrae e converte il totale dalla riga."""
+        return float(line.split(":", 1)[1].strip().replace("€", "").replace(",", "."))
+
+    def _parsa_medicamento(self, line: str) -> Medicamento:
+        """Estrae i dati di un farmaco dalla riga e li converte in un oggetto Medicamento."""
+        parts = line.split("|")
+        if len(parts) == 4:
+            nombre = parts[0].strip()
+            cantidad_info = parts[1].strip().split()
+            cantidad = float(cantidad_info[0])
+            unitad = cantidad_info[1] if len(cantidad_info) > 1 else ''
+            precio = float(parts[3].strip().replace("€", "").replace(",", "."))
+            return Medicamento(nombre, cantidad, precio, unitad)
+        return None
