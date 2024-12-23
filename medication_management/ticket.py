@@ -1,8 +1,8 @@
-import locale
 from datetime import datetime
 from dataclasses import dataclass, field
 from typing import List
 from .medicamento import Medicamento
+import locale
 
 @dataclass
 class Ticket:
@@ -13,6 +13,7 @@ class Ticket:
 
     def cargar_ticket_desde_txt(self, file_path: str):
         """Carica i dati di un ticket leggendo un file di testo."""
+        locale.setlocale(locale.LC_TIME, 'it_IT.UTF-8')  # Configura la locale italiana
         lines = self._leggi_file(file_path)
         self._parsa_dati(lines)
 
@@ -23,7 +24,7 @@ class Ticket:
 
     def _parsa_dati(self, lines: List[str]):
         """Analizza le righe del file e aggiorna gli attributi del ticket."""
-        self.medicamentos.clear()  
+        self.medicamentos.clear()  # Reset dei farmaci
 
         for line in lines:
             line = line.strip()
@@ -48,7 +49,10 @@ class Ticket:
 
     def _parsa_data(self, line: str) -> datetime:
         """Estrae e converte la data dalla riga."""
-        return datetime.strptime(line.split(":", 1)[1].strip(), "%d %B %Y")
+        data_testo = line.split(":", 1)[1].strip()  # Estrae il contenuto dopo "Data:"
+        
+        # Converte la stringa della data in oggetto datetime usando il formato italiano
+        return datetime.strptime(data_testo, "%d %B %Y")
 
     def _parsa_totale(self, line: str) -> float:
         """Estrae e converte il totale dalla riga."""
@@ -62,6 +66,6 @@ class Ticket:
             cantidad_info = parts[1].strip().split()
             cantidad = float(cantidad_info[0])
             unitad = cantidad_info[1] if len(cantidad_info) > 1 else ''
-            precio = float(parts[3].strip().replace("€", "").replace(",", "."))
-            return Medicamento(nombre, cantidad, precio, unitad)
+            prezzo = float(parts[3].strip().replace("€", "").replace(",", "."))
+            return Medicamento(nombre, cantidad, prezzo, unitad)
         return None
