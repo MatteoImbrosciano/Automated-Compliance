@@ -1,4 +1,3 @@
-# inventario.py
 from dataclasses import dataclass, field
 from typing import List
 from .medicamento import Medicamento
