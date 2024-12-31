@@ -12,8 +12,8 @@ class Ticket:
     totale: float = None
 
     def cargar_ticket_desde_txt(self, file_path: str):
-        
-        locale.setlocale(locale.LC_TIME, 'it_IT.UTF-8')  # Configura la locale italiana
+
+        locale.setlocale(locale.LC_TIME, 'it_IT.UTF-8')  
         lines = self._leggi_file(file_path)
         medicamentos = self._estrai_medicamenti(lines)
         self._aggiorna_medicamentos(medicamentos)
