@@ -8,22 +8,23 @@ class Inventario:
 
     def agregar_medicamento(self, medicamento: Medicamento):
         if not isinstance(medicamento, Medicamento):
-            raise TypeError("El objeto debe ser una instancia de la clase Medicamento.")
+            raise TypeError("L'oggetto deve essere un'istanza della classe Medicamento.")
         for med in self.medicamentos:
             if med.nombre == medicamento.nombre:
                 med.cantidad += medicamento.cantidad
                 return
         self.medicamentos.append(medicamento)
 
-    def eliminar_medicamento(self, nombre: str):
+    def eliminare_medicamento(self, nome: str):
         self.medicamentos = [
-            med for med in self.medicamentos if med.nombre != nombre.strip()
+            med for med in self.medicamentos if med.nombre != nome.strip()
         ]
 
-    def obtener_inventario(self):
+    def ottenere_inventario(self):
+        """Restituisce una lista dei medicinali nell'inventario."""
         return [(med.nombre, med.cantidad, med.unitad) for med in self.medicamentos]
 
     def __str__(self):
         if not self.medicamentos:
-            return "El inventario está vacío."
+            return "L'inventario è vuoto."
         return "\n".join(str(med) for med in self.medicamentos)
