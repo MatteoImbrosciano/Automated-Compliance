@@ -3,7 +3,7 @@ from medication_management.ticket import Ticket
 from medication_management.medicamento import Medicamento
 
 def test_cargar_ticket_desde_txt(tmp_path):
-    # Crea un file temporaneo per il test
+
     ticket_content = """Pharmacy Receipt - Farmacia Italia  
 Cliente: Matteo Imbrosciano  
 Data: 15 Febbraio 2024
@@ -28,7 +28,6 @@ Totale: €55.70
 
     assert ticket.cliente == "Matteo Imbrosciano"
     
-    # Normalizza entrambi i lati per evitare mismatch di maiuscole/minuscole
     assert ticket.fecha.strftime("%d %B %Y").capitalize() == "15 Febbraio 2024".capitalize()
     
     assert ticket.totale == 55.70
