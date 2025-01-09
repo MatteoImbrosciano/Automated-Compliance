@@ -1,14 +1,15 @@
 ## Criteri di Selezione
 
-**Prerequisiti per la scelta della libreria di asserzioni:**
+Alcuni prerequisiti per la scelta delle librerie:
 
-- **Buona valutazione su Snyk Advisor:**  
-  Avere una buona valutazione su [Snyk Advisor](https://snyk.io/advisor) implica che lo strumento rispetta alti standard di sicurezza e gestione dei rischi, rendendolo affidabile per l’utilizzo in un repository.
+- Deve avere un buon punteggio su snyk Advisor. Avere un buon punteggio su Skyk Advisor implica che lo strumento soddisfa standard elevati in ambiti quali la sicurezza dei dati e la gestione dei rischi, dimostrandosi un buon strumento destinato all'utilizzo in un repository.
+- In definitiva, verrà valorizzato lo strumento che comprende una maggiore varietà di asserzioni, permettendoci una maggiore varietà nell'esecuzione dei diversi test.
+
+I prerequisiti per la scelta di un test runner saranno simili a quelli della libreria di asserzioni:
+
+- Deve avere un buon punteggio su snyk Advisor. Avere un buon punteggio su Skyk Advisor implica che lo strumento soddisfa standard elevati in ambiti quali la sicurezza dei dati e la gestione dei rischi, dimostrandosi un buon strumento destinato all'uso in un repository/progetto.
+- Infine, verrà valutata la scalabilità del test runner nel caso in cui il progetto diventi più complesso nelle future Milestones. In questa scalabilità verranno valorizzate funzionalità come: un sistema di dispositivi e risultati dettagliati, facilitando il debugging quando ci sono molti errori in un grande progetto.
   
-- **Varietà di asserzioni:**  
-  In ultima analisi, si valorizzerà maggiormente una libreria che offra una gamma ampia di asserzioni, consentendo maggiore flessibilità nella realizzazione di test differenti.
-
-
 ## Analisi delle Opzioni
 
 ### Librerie di asserzioni esaminate
