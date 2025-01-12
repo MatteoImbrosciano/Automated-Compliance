@@ -3,6 +3,7 @@ from dataclasses import dataclass, field
 from typing import List
 from .medicamento import Medicamento
 import locale
+from typing import Optional
 
 @dataclass
 class Ticket:
@@ -12,12 +13,11 @@ class Ticket:
     totale: float = None
 
     def cargar_ticket_desde_txt(self, file_path: str):
-        """Metodo principale per caricare i dati del ticket da un file di testo."""
         locale.setlocale(locale.LC_TIME, 'it_IT.UTF-8')  
         lines = self._leggi_file(file_path)
-        self._parsa_dati_generali(lines)  # Analizza i dati generali (cliente, data, totale)
-        medicamentos = self._estrai_medicamenti(lines)  # Estrae i medicinali
-        self._aggiorna_medicamentos(medicamentos)  # Aggiorna lo stato interno dei medicinali
+        self._parsa_dati_generali(lines)  
+        medicamentos = self._estrai_medicamenti(lines)  
+        self._aggiorna_medicamentos(medicamentos)  
 
     def _leggi_file(self, file_path: str) -> List[str]:
         """Legge un file di testo e restituisce una lista di righe."""
@@ -25,7 +25,6 @@ class Ticket:
             return file.readlines()
 
     def _parsa_dati_generali(self, lines: List[str]):
-        """Analizza i dati generali del ticket: cliente, data e totale."""
         for line in lines:
             line = line.strip()
             if line.startswith("Cliente:"):
@@ -68,14 +67,26 @@ class Ticket:
         return float(line.split(":", 1)[1].strip().replace("€", "").replace(",", "."))
 
     @staticmethod
-    def _parsa_medicamento(line: str) -> Medicamento:
-        """Parsifica una riga e restituisce un oggetto Medicamento."""
-        parts = line.split("|")
-        if len(parts) == 4:
+    def _parsa_medicamento(line: str) -> Optional[Medicamento]:
+
+        try:
+            parts = line.split("|")
+            if len(parts) != 4:
+                raise ValueError(f"Formato errato della riga: {line}")
+        
             nombre = parts[0].strip()
+            if not nombre:
+                raise ValueError(f"Nome del medicinale mancante nella riga: {line}")
+        
             cantidad_info = parts[1].strip().split()
+            if len(cantidad_info) != 2:
+                raise ValueError(f"Informazioni sulla quantità malformate nella riga: {line}")
+        
             cantidad = float(cantidad_info[0])
-            unitad = cantidad_info[1] if len(cantidad_info) > 1 else ''
+            unitad = cantidad_info[1]
             precio = float(parts[3].strip().replace("€", "").replace(",", "."))
+        
             return Medicamento(nombre, cantidad, precio, unitad)
-        return None
+        except ValueError as e:
+            print(f"Errore nel parsificare la riga: {e}")
+            return None
