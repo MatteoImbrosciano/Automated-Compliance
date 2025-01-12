@@ -72,4 +72,4 @@ Il progetto utilizza `pytest` come test runner. I comandi principali per eseguir
 
 1. **Eseguire tutti i test:**
    ```bash
-   poetry run pytest
+   poetry run poe test
