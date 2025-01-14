@@ -36,11 +36,11 @@ Totale: €55.70
     medicamento1 = ticket.medicamentos[0]
     assert medicamento1.nombre == "Sintrom"
     assert medicamento1.cantidad == 1
-    assert medicamento1.unitad == "mg"
+    assert medicamento1.unidad == "mg"
     assert medicamento1.precio == 7.50
 
     medicamento2 = ticket.medicamentos[1]
     assert medicamento2.nombre == "Elidel"
     assert medicamento2.cantidad == 10
-    assert medicamento2.unitad == "mg/g"
+    assert medicamento2.unidad == "mg/g"
     assert medicamento2.precio == 12.30
