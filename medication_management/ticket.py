@@ -84,3 +84,4 @@ class Ticket:
         except ValueError as e:
             print(f"Errore nel parsificare la riga: {e}")
             return None
+        
