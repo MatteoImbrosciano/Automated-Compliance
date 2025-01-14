@@ -6,7 +6,7 @@ def test_medicamento_inizializzazione_valida():
     assert medicamento.nombre == "Aspirina"
     assert medicamento.cantidad == 100
     assert medicamento.precio == 4.50
-    assert medicamento.unitad == "mg"
+    assert medicamento.unidad == "mg"
 
 def test_medicamento_inizializzazione_nome_non_valido():
     with pytest.raises(ValueError):
