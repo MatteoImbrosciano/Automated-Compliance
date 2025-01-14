@@ -5,7 +5,7 @@ class Medicamento:
     nombre: str
     cantidad: float
     precio: float
-    unitad: str  
+    unidad: str  
     
     def __post_init__(self):
         if not isinstance(self.nombre, str) or not self.nombre.strip():
@@ -14,6 +14,6 @@ class Medicamento:
             raise ValueError("La cantidad debe ser un valor numérico positivo.")
         if self.precio <= 0:
             raise ValueError("El precio debe ser un valor numérico positivo.")
-        if not isinstance(self.unitad, str) or not self.unitad.strip():
+        if not isinstance(self.unidad, str) or not self.unidad.strip():
             raise ValueError("La unidad debe ser una cadena no vacía.")
     
