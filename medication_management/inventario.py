@@ -21,8 +21,7 @@ class Inventario:
         ]
 
     def ottenere_inventario(self):
-        """Restituisce una lista dei medicinali nell'inventario."""
-        return [(med.nombre, med.cantidad, med.unitad) for med in self.medicamentos]
+        return [(med.nombre, med.cantidad, med.unidad) for med in self.medicamentos]
 
     def __str__(self):
         if not self.medicamentos:
