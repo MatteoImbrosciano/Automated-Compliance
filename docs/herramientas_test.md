@@ -66,3 +66,10 @@ La configurazione finale è dunque:
 - **Test Runner:** `pytest`, per sfruttare la sua versatilità, le fixture integrate, il supporto della community, l’output chiaro e la buona valutazione di sicurezza su Snyk Advisor.
 
 Questa combinazione consente di mantenere un equilibrio tra stabilità, sicurezza, varietà di test e capacità di gestione di scenari complessi, favorendo uno sviluppo sostenibile del progetto nel tempo.
+
+## Comandi principali per il testing
+Il progetto utilizza `pytest` come test runner. I comandi principali per eseguire i test e analizzare la copertura del codice sono documentati di seguito:
+
+1. **Eseguire tutti i test:**
+   ```bash
+   poetry run poe test

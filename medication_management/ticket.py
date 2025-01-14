@@ -20,7 +20,6 @@ class Ticket:
         self._aggiorna_medicamentos(medicamentos)  
 
     def _leggi_file(self, file_path: str) -> List[str]:
-        """Legge un file di testo e restituisce una lista di righe."""
         with open(file_path, "r", encoding="utf-8") as file:
             return file.readlines()
 
@@ -35,7 +34,6 @@ class Ticket:
                 self.totale = self._parsa_totale(line)
 
     def _estrai_medicamenti(self, lines: List[str]) -> List[Medicamento]:
-        """Estrae i farmaci dalle righe fornite e restituisce una lista di Medicamento."""
         medicamentos = []
         for line in lines:
             line = line.strip()
@@ -46,24 +44,20 @@ class Ticket:
         return medicamentos
 
     def _aggiorna_medicamentos(self, medicamentos: List[Medicamento]):
-        """Aggiorna la lista interna dei medicinali con quelli forniti."""
         self.medicamentos.clear()
         self.medicamentos.extend(medicamentos)
 
     @staticmethod
     def _parsa_cliente(line: str) -> str:
-        """Estrae il cliente dalla riga."""
         return line.split(":", 1)[1].strip()
 
     @staticmethod
     def _parsa_data(line: str) -> datetime:
-        """Estrae e converte la data dalla riga."""
         data_testo = line.split(":", 1)[1].strip()
         return datetime.strptime(data_testo, "%d %B %Y")
 
     @staticmethod
     def _parsa_totale(line: str) -> float:
-        """Estrae e converte il totale dalla riga."""
         return float(line.split(":", 1)[1].strip().replace("€", "").replace(",", "."))
 
     @staticmethod
