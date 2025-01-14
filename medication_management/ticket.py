@@ -83,10 +83,10 @@ class Ticket:
                 raise ValueError(f"Informazioni sulla quantità malformate nella riga: {line}")
         
             cantidad = float(cantidad_info[0])
-            unitad = cantidad_info[1]
+            unidad = cantidad_info[1]
             precio = float(parts[3].strip().replace("€", "").replace(",", "."))
         
-            return Medicamento(nombre, cantidad, precio, unitad)
+            return Medicamento(nombre, cantidad, precio, unidad)
         except ValueError as e:
             print(f"Errore nel parsificare la riga: {e}")
             return None
