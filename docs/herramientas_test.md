@@ -58,15 +58,6 @@ Le opzioni esterne non garantiscono gli standard di sicurezza e manutenzione ric
 **Scelta finale del test runner:**  
 `pytest` è la scelta ottimale: garantisce la sicurezza, la flessibilità e la scalabilità necessarie. L’integrazione con asserzioni semplici (`assert`) e la presenza di fixture semplificano il testing, rendendo più agile la crescita futura del progetto.
 
-## Conclusione
-
-La configurazione finale è dunque:
-
-- **Libreria di asserzioni:** `unittest` come base, arricchita quando necessario con asserzioni di `pytest` e l’`assert` nativo di Python, per garantire una gamma più ampia di test.
-- **Test Runner:** `pytest`, per sfruttare la sua versatilità, le fixture integrate, il supporto della community, l’output chiaro e la buona valutazione di sicurezza su Snyk Advisor.
-
-Questa combinazione consente di mantenere un equilibrio tra stabilità, sicurezza, varietà di test e capacità di gestione di scenari complessi, favorendo uno sviluppo sostenibile del progetto nel tempo.
-
 ## Comandi principali per il testing
 Il progetto utilizza `pytest` come test runner. I comandi principali per eseguire i test e analizzare la copertura del codice sono documentati di seguito:
 
